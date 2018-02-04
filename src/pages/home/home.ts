@@ -13,17 +13,16 @@ import { ShoppingListService } from '../../services/shopping-list/shopping-list.
 export class HomePage {
   shoppingList$: Observable<Item[]>;
 
-  constructor(public navCtrl: NavController, private shopping: ShoppingListService) {
+  constructor(public navCtrl: NavController, private shopping: ShoppingListService) {}
 
-    this.shoppingList$ = this.shopping.getShoppingList().snapshotChanges()
-    .map(
-        changes => {
-          return changes.map(c => ({
-            key: c.payload.key, ...c.payload.val() 
-          }))
-        })
-
-
-  }
-
+  this.shoppingList$ = this.shopping
+  .getShoppingList()
+  .snapshotChanges()
+  .map(
+      changes => {
+        return changes.map(c => ({
+          key: c.payload.key, ...c.payload.val() 
+        }));
+      });
 }
+
